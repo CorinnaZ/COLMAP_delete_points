@@ -27,11 +27,12 @@ for delete in numbers:
     for k, line in enumerate(indices):
         line = indices[k]
         line = [float(x) for x in line]
-        if delete in line:
-            index = line.index(delete)
-            mydel = line[index+1]
-            indices[k].remove(str(int(delete)))
-            indices[k].remove(str(int(mydel)))
+        for j, item in enumerate(line):
+            if j%2 == 0 and  delete == item:
+                index = line.index(delete)
+                mydel = line[index+1]
+                indices[k].remove(str(int(delete)))
+                indices[k].remove(str(int(mydel)))
 # if no image ids remain: do not write the line
 # if any image ids remain: write the line (without ids for deleted images)
 for k, line in enumerate(indices):
@@ -43,4 +44,3 @@ for k, line in enumerate(indices):
         for item in indices[k]:
             result.write(str(item)+" ")
         result.write("\n")
-print(indices)
